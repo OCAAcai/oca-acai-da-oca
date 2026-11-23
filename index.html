@@ -119,6 +119,30 @@ footer{text-align:center;padding:24px;color:#e9c8ef}.floating{position:fixed;bot
     <div class="total"><span>Total</span><span id="total">R$ 0,00</span></div>
     <div class="group"><label for="customer"><strong>Seu nome</strong></label><input id="customer" type="text" placeholder="Digite seu nome"></div>
     <div class="group"><label for="address"><strong>Endereço para entrega</strong></label><input id="address" type="text" placeholder="Rua, número, bairro e referência"></div>
+    <div class="group">
+  <label for="customerPhone"><strong>Seu telefone</strong></label>
+  <input id="customerPhone" type="tel" placeholder="Digite seu WhatsApp" required>
+</div>
+
+<div class="group">
+  <label for="deliveryArea"><strong>Localidade de entrega</strong></label>
+  <select id="deliveryArea" required>
+    <option value="">Selecione sua localidade</option>
+    <option value="Macau">Macau — Grátis</option>
+    <option value="Ilha 1">Ilha 1 — R$ 3,00</option>
+    <option value="Ilha 2">Ilha 2 — R$ 7,00</option>
+  </select>
+</div>
+
+<div class="group">
+  <label for="paymentMethod"><strong>Forma de pagamento</strong></label>
+  <select id="paymentMethod" required>
+    <option value="">Selecione o pagamento</option>
+    <option value="Pix">Pix</option>
+    <option value="Dinheiro">Dinheiro</option>
+    <option value="Cartão">Cartão</option>
+  </select>
+</div>
     <div class="delivery">🚚 Entrega grátis em toda Macau (exceto Ilha 1 e Ilha 2). Consulte a loja sobre a entrega nesses locais.</div>
     <button class="send" id="send">Finalizar pedido pelo WhatsApp</button>
   </section>
