@@ -225,6 +225,7 @@ const orderId=crypto.randomUUID();
    const {data,error}=await supabaseClient
      .from('orders')
      .insert([{
+       id:orderId, 
        customer_name:name,
        phone:customerPhone,
        address:address,
@@ -236,14 +237,11 @@ const orderId=crypto.randomUUID();
        delivery_fee:deliveryFee,
        total:total,
        status:'Pedido recebido'
-     }])
-     .select('id')
-     .single();
+     }]);
 
    if(error) throw error;
 
    const orderNumber=orderId.slice(0,8).toUpperCase();
-
    let msg=`Olá! Quero fazer um pedido na OCA - Açaí da Oca 💜
 
 Pedido: ${orderNumber}
