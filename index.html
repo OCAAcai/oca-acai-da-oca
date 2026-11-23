@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#650078">
+<title>OCA • Açaí da Oca</title>
+<style>
+:root{--purple:#650078;--deep:#21002c;--pink:#ed27d2;--yellow:#ffd51e;--ink:#23002d;--cream:#fff8ff}
+*{box-sizing:border-box}body{margin:0;background:#180020;color:#fff;font-family:Arial,Helvetica,sans-serif}
+header{background:radial-gradient(circle at 20% 20%,#a400a9,#4d005f 50%,#1c0027);padding:24px 18px 34px;text-align:center;border-bottom:4px solid var(--yellow)}
+.brand{font-weight:1000;font-size:clamp(2.2rem,8vw,4.5rem);letter-spacing:2px;text-shadow:3px 4px #30003e,-2px -2px #f5caff}.brand span{color:var(--yellow);display:block;font-family:cursive;font-size:.55em;letter-spacing:0;text-shadow:2px 3px #30003e}
+.site-logo{display:block;width:auto;height:180px;max-width:min(90%,360px);object-fit:contain;margin:0 auto 12px}
+header p{margin:10px auto 0;max-width:650px;font-weight:700}
+@media(max-width:700px){.site-logo{height:120px;max-width:90%}}
+.wrap{max-width:1100px;margin:auto;padding:22px 15px 110px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center;background:linear-gradient(135deg,#8b008c,#3a004e);border:2px solid #f04ce1;border-radius:24px;padding:24px;box-shadow:0 10px 35px #0008}
+.hero h1{font-size:clamp(1.8rem,5vw,3.3rem);margin:0 0 8px}.hero h1 em{color:var(--yellow);font-style:normal}.hero p{line-height:1.5}.cup{font-size:clamp(6rem,18vw,11rem);text-align:center;filter:drop-shadow(0 12px 9px #19001f)}
+.section{margin-top:26px;background:#fffaff;color:var(--ink);border-radius:20px;padding:20px;box-shadow:0 8px 25px #0005}
+.section h2{margin:0 0 15px;color:#79008b;font-size:1.5rem}.sub{color:#6c5570;margin-top:-8px;font-size:.92rem}
+.sizes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.size{border:2px solid #e8c7ec;border-radius:16px;padding:14px;text-align:center;background:#fff;cursor:pointer}.size input{accent-color:#89009a}.size:has(input:checked){border-color:#9c00ad;background:#fff0ff;box-shadow:0 0 0 2px #9c00ad33}.size strong{display:block;font-size:1.45rem;color:#650078}.price{font-size:1.3rem;font-weight:900;color:#d000a8}.muted{font-size:.84rem;color:#6d5a70}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}.group{margin:14px 0}.group h3{margin:0 0 8px;color:#4f005d}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.choice{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid #ead6ed;border-radius:10px;padding:9px;font-size:.95rem}.choice input{accent-color:#87009a;width:17px;height:17px;flex-shrink:0}.hint{font-size:.82rem;color:#765f79;margin:5px 0}.counter{font-weight:800;color:#85008e}
+input[type=text],input[type=tel],textarea{width:100%;padding:12px;border:1px solid #d9bfdc;border-radius:10px;font:inherit;color:#26002e;background:#fff}textarea{min-height:75px;resize:vertical}
+button{border:0;border-radius:12px;padding:13px 17px;font-weight:900;font-size:1rem;cursor:pointer}.add{background:var(--yellow);color:#28002e;width:100%;margin-top:14px}.send{background:#20bd61;color:#052b13;width:100%;font-size:1.1rem}.cartline{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #ead8ec}.total{font-size:1.4rem;font-weight:1000;color:#7d008b;display:flex;justify-content:space-between;padding:12px 0}.empty{color:#7b687e}.delivery{background:#fff0a8;border-radius:12px;padding:12px;color:#3d2b00;font-weight:800;margin-top:14px}
+footer{text-align:center;padding:24px;color:#e9c8ef}.floating{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);width:min(94%,500px);box-shadow:0 5px 25px #0008}
+@media(max-width:700px){.hero{grid-template-columns:1fr;text-align:center}.cup{font-size:7rem}.cols{grid-template-columns:1fr}.sizes{gap:7px}.size{padding:10px 4px}.size strong{font-size:1.1rem}.choices{grid-template-columns:1fr 1fr}.section{padding:16px}}
+</style>
+</head>
+<body>
+<header>
+  <img class="site-logo" src="logo-oca.jpg" alt="Logotipo OCA – Açaí da Oca">
+  <div class="brand">OCA <span>Açaí da Oca</span></div>
+  <p>Seu açaí do seu jeito! 💜 Complementos grátis e muito sabor em cada tigela.</p>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div><h1>Monte seu <em>açaí!</em></h1><p>Escolha o tamanho, suas frutas, o creme favorito e os complementos. Depois, envie seu pedido diretamente para nosso WhatsApp.</p><strong>🚚 Entrega grátis em toda Macau (exceto Ilha 1 e Ilha 2).</strong></div>
+    <div class="cup" aria-label="Açaí">🍧💜</div>
+  </section>
+
+  <section class="section">
+    <h2>1. Escolha o tamanho</h2>
+    <div class="sizes">
+      <label class="size"><input type="radio" name="size" value="400" checked><strong>400 ml</strong><span class="price">R$ 12,00</span><span class="muted">4 complementos grátis</span></label>
+      <label class="size"><input type="radio" name="size" value="500"><strong>500 ml</strong><span class="price">R$ 14,00</span><span class="muted">4 complementos grátis</span></label>
+      <label class="size"><input type="radio" name="size" value="700"><strong>700 ml</strong><span class="price">R$ 20,00</span><span class="muted">6 complementos grátis</span></label>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>2. Monte seu açaí</h2>
+    <div class="cols">
+      <div>
+        <div class="group">
+          <h3>🍓 Frutas grátis — escolha 2</h3>
+          <p class="hint">Selecione duas opções. Frutas extras são cobradas à parte.</p>
+          <div class="choices" id="freeFruits">
+            <label class="choice"><input type="checkbox" value="Banana"> Banana</label>
+            <label class="choice"><input type="checkbox" value="Uva"> Uva</label>
+          </div>
+        </div>
+        <div class="group">
+          <h3>🍓 Frutas extras — cobradas à parte</h3>
+          <div class="choices" id="extraFruits">
+            <label class="choice"><input type="checkbox" value="Morango"> Morango</label>
+            <label class="choice"><input type="checkbox" value="Kiwi"> Kiwi</label>
+            <label class="choice"><input type="checkbox" value="Mirtilo"> Mirtilo</label>
+          </div>
+          <p class="hint">Valor das frutas extras: confirmar com a loja pelo WhatsApp.</p>
+        </div>
+        <div class="group">
+          <h3>🍦 Cremes — 1º creme grátis</h3>
+          <p class="hint">Escolha um creme grátis.</p>
+          <div class="choices" id="freeCream">
+            <label class="choice"><input type="radio" name="cream" value="Creme Ninho Trufado"> Ninho Trufado</label>
+            <label class="choice"><input type="radio" name="cream" value="Creme de Chocolate"> Chocolate</label>
+          </div>
+        </div>
+        <div class="group">
+          <h3>🍫 Cremes extras</h3>
+          <div class="choices" id="extraCream">
+            <label class="choice"><input type="checkbox" value="2º creme (Ninho/Chocolate)" data-price="2"> 2º creme — R$ 2,00</label>
+            <label class="choice"><input type="checkbox" value="Nutella" data-price="2"> Nutella — R$ 2,00</label>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="group">
+          <h3>✨ Lista de complementos</h3>
+          <p class="hint">Selecione até <span class="counter" id="limitText">4</span> complementos grátis. Cada complemento EXTRA (após o limite): R$ 1,50.</p>
+          <div class="choices" id="toppings">
+            <label class="choice"><input type="checkbox" value="Paçoca"> Paçoca</label>
+            <label class="choice"><input type="checkbox" value="Jujuba"> Jujuba</label>
+            <label class="choice"><input type="checkbox" value="Chocoball"> Chocoball</label>
+            <label class="choice"><input type="checkbox" value="Disquetes"> Disquetes</label>
+            <label class="choice"><input type="checkbox" value="Granola"> Granola</label>
+            <label class="choice"><input type="checkbox" value="Oreo"> Oreo</label>
+            <label class="choice"><input type="checkbox" value="Ovomaltine"> Ovomaltine</label>
+            <label class="choice"><input type="checkbox" value="Leite em pó"> Leite em pó</label>
+            <label class="choice"><input type="checkbox" value="Marshmallow"> Marshmallow</label>
+            <label class="choice"><input type="checkbox" value="Leite condensado"> Leite condensado</label>
+            <label class="choice"><input type="checkbox" value="Cobertura de morango"> Cobertura de morango</label>
+          </div>
+          <p class="hint" id="toppingCount">0 selecionados</p>
+        </div>
+        <div class="group">
+          <h3>📝 Observações</h3>
+          <textarea id="notes" placeholder="Ex.: pouco leite em pó, sem algum ingrediente..."></textarea>
+        </div>
+      </div>
+    </div>
+    <button class="add" id="add">Adicionar ao carrinho</button>
+  </section>
+
+  <section class="section">
+    <h2>🛒 Seu carrinho</h2>
+    <div id="cart"><p class="empty">Seu carrinho está vazio.</p></div>
+    <div class="total"><span>Total</span><span id="total">R$ 0,00</span></div>
+    <div class="group"><label for="customer"><strong>Seu nome</strong></label><input id="customer" type="text" placeholder="Digite seu nome"></div>
+    <div class="group"><label for="address"><strong>Endereço para entrega</strong></label><input id="address" type="text" placeholder="Rua, número, bairro e referência"></div>
+    <div class="delivery">🚚 Entrega grátis em toda Macau (exceto Ilha 1 e Ilha 2). Consulte a loja sobre a entrega nesses locais.</div>
+    <button class="send" id="send">Finalizar pedido pelo WhatsApp</button>
+  </section>
+</main>
+<footer>OCA • Açaí da Oca 💜<br>Peça já o seu — sabor, qualidade e muito amor em cada tigela!</footer>
+<script>
+const phone='5584921492739';
+const money=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+let cart=[];
+const checked=id=>[...document.querySelectorAll('#'+id+' input:checked')];
+const sizeInput=()=>document.querySelector('input[name="size"]:checked');
+const sizeInfo=()=>({400:{price:12,limit:4},500:{price:14,limit:4},700:{price:20,limit:6}}[sizeInput().value]);
+function updateLimit(){
+ const lim=sizeInfo().limit;
+ document.getElementById('limitText').textContent=lim;
+ const n=checked('toppings').length;
+ document.getElementById('toppingCount').textContent=`${n} selecionados • ${Math.max(0,n-lim)} extra(s)`;
+}
+document.querySelectorAll('input[name="size"]').forEach(x=>x.addEventListener('change',updateLimit));
+document.querySelectorAll('#toppings input').forEach(x=>x.addEventListener('change',updateLimit));
+document.getElementById('add').addEventListener('click',()=>{
+ const free=checked('freeFruits').map(x=>x.value);
+ if(free.length!==2){alert('Escolha exatamente 2 frutas grátis (banana e/ou uva).');return}
+ const cream=document.querySelector('input[name="cream"]:checked');
+ if(!cream){alert('Escolha seu primeiro creme grátis.');return}
+ const s=sizeInput().value, info=sizeInfo(), toppings=checked('toppings').map(x=>x.value);
+ const extraToppings=Math.max(0,toppings.length-info.limit);
+ const creamExtras=checked('extraCream');
+ const extraCreamPrice=creamExtras.reduce((a,x)=>a+Number(x.dataset.price||0),0);
+ const item={size:s,base:info.price,free,extraFruits:checked('extraFruits').map(x=>x.value),cream:cream.value,creamExtras:creamExtras.map(x=>x.value),toppings,extraToppings,extraCreamPrice,notes:document.getElementById('notes').value};
+ item.subtotal=item.base+extraToppings*1.5+extraCreamPrice;
+ cart.push(item);renderCart();
+ alert('Açaí adicionado ao carrinho!');
+});
+function renderCart(){
+ const el=document.getElementById('cart');
+ if(!cart.length){el.innerHTML='<p class="empty">Seu carrinho está vazio.</p>'}
+ else el.innerHTML=cart.map((x,i)=>`<div class="cartline"><div><strong>${x.size} ml</strong><br><small>Frutas: ${x.free.join(', ')}${x.extraFruits.length?'; extras: '+x.extraFruits.join(', '):''}<br>Creme: ${x.cream}${x.creamExtras.length?'; extras: '+x.creamExtras.join(', '):''}<br>Complementos: ${x.toppings.join(', ')||'nenhum'}${x.extraToppings?` (${x.extraToppings} extra[s])`:''}</small><br><button style="padding:5px 9px;margin-top:6px;background:#ffe0f8;color:#62006d;font-size:.8rem" onclick="removeItem(${i})">Remover</button></div><strong>${money(x.subtotal)}</strong></div>`).join('');
+ document.getElementById('total').textContent=money(cart.reduce((a,x)=>a+x.subtotal,0));
+}
+function removeItem(i){cart.splice(i,1);renderCart()}
+document.getElementById('send').addEventListener('click',()=>{
+ if(!cart.length){alert('Adicione pelo menos um açaí ao carrinho.');return}
+ const name=document.getElementById('customer').value.trim(),address=document.getElementById('address').value.trim();
+ if(!name||!address){alert('Informe seu nome e endereço para entrega.');return}
+ let msg=`Olá! Quero fazer um pedido na OCA - Açaí da Oca 💜\n\nNome: ${name}\nEndereço: ${address}\n\n`;
+ cart.forEach((x,i)=>{msg+=`Açaí ${i+1} — ${x.size} ml: ${money(x.base)}\nFrutas grátis: ${x.free.join(', ')}\nFrutas extras: ${x.extraFruits.join(', ')||'não selecionadas'}\nCreme grátis: ${x.cream}\nCremes extras: ${x.creamExtras.join(', ')||'nenhum'}\nComplementos: ${x.toppings.join(', ')||'nenhum'}\nComplementos extras: ${x.extraToppings} × R$ 1,50\nObservações: ${x.notes||'nenhuma'}\nSubtotal: ${money(x.subtotal)}\n\n`});
+ msg+=`TOTAL: ${money(cart.reduce((a,x)=>a+x.subtotal,0))}\n\nEntrega grátis em Macau (exceto Ilha 1 e Ilha 2).`;
+ window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,'_blank');
+});
+updateLimit();
+</script>
+</body>
+</html>
