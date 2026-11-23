@@ -175,7 +175,7 @@ document.getElementById('add').addEventListener('click',()=>{
  const creamExtras=checked('extraCream');
  const extraCreamPrice=creamExtras.reduce((a,x)=>a+Number(x.dataset.price||0),0);
  const item={size:s,base:info.price,free,extraFruits:checked('extraFruits').map(x=>x.value),cream:cream.value,creamExtras:creamExtras.map(x=>x.value),toppings,extraToppings,extraCreamPrice,notes:document.getElementById('notes').value};
- item.subtotal=item.base+extraToppings*1.5+extraCreamPrice;
+ item.subtotal=item.base+(item.extraFruits.length*1.5)+(extraToppings*1.5)+extraCreamPrice;
  cart.push(item);renderCart();
  alert('Açaí adicionado ao carrinho!');
 });
