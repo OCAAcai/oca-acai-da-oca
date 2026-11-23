@@ -52,12 +52,12 @@ footer{text-align:center;padding:24px;color:#e9c8ef}.floating{position:fixed;bot
     <div class="cols">
       <div>
         <div class="group">
-          <h3>🍓 Frutas grátis — escolha 2</h3>
-          <p class="hint">Selecione duas opções. Frutas extras são cobradas à parte.</p>
-          <div class="choices" id="freeFruits">
-            <label class="choice"><input type="checkbox" value="Banana"> Banana</label>
-            <label class="choice"><input type="checkbox" value="Uva"> Uva</label>
-          </div>
+  <h3>🍓 Frutas grátis — opcional (até 2)</h3>
+  <p class="hint">Se quiser, selecione até duas opções. Você também pode não escolher nenhuma. Frutas extras são cobradas à parte.</p>
+  <div class="choices" id="freeFruits">
+    <label class="choice"><input type="checkbox" value="Banana"> Banana</label>
+    <label class="choice"><input type="checkbox" value="Uva"> Uva</label>
+  </div>
         </div>
         <div class="group">
           <h3>🍓 Frutas extras — cobradas à parte</h3>
@@ -140,7 +140,6 @@ document.querySelectorAll('input[name="size"]').forEach(x=>x.addEventListener('c
 document.querySelectorAll('#toppings input').forEach(x=>x.addEventListener('change',updateLimit));
 document.getElementById('add').addEventListener('click',()=>{
  const free=checked('freeFruits').map(x=>x.value);
- if(free.length!==2){alert('Escolha exatamente 2 frutas grátis (banana e/ou uva).');return}
  const cream=document.querySelector('input[name="cream"]:checked');
  if(!cream){alert('Escolha seu primeiro creme grátis.');return}
  const s=sizeInput().value, info=sizeInfo(), toppings=checked('toppings').map(x=>x.value);
