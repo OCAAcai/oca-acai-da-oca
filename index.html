@@ -157,7 +157,7 @@ const money=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 let cart=[];
 const checked=id=>[...document.querySelectorAll('#'+id+' input:checked')];
 const sizeInput=()=>document.querySelector('input[name="size"]:checked');
-const sizeInfo=()=>({400:{price:12,limit:4},500:{price:14,limit:4},700:{price:20,limit:6}}[sizeInput().value]);
+const sizeInfo=()=>({400:{price:14,limit:4},500:{price:17,limit:4},700:{price:21,limit:6}}[sizeInput().value]);
 function updateLimit(){
  const lim=sizeInfo().limit;
  document.getElementById('limitText').textContent=lim;
