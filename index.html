@@ -186,15 +186,111 @@ function renderCart(){
  document.getElementById('total').textContent=money(cart.reduce((a,x)=>a+x.subtotal,0));
 }
 function removeItem(i){cart.splice(i,1);renderCart()}
-document.getElementById('send').addEventListener('click',()=>{
- if(!cart.length){alert('Adicione pelo menos um açaí ao carrinho.');return}
- const name=document.getElementById('customer').value.trim(),address=document.getElementById('address').value.trim();
- if(!name||!address){alert('Informe seu nome e endereço para entrega.');return}
- let msg=`Olá! Quero fazer um pedido na OCA - Açaí da Oca 💜\n\nNome: ${name}\nEndereço: ${address}\n\n`;
- cart.forEach((x,i)=>{msg+=`Açaí ${i+1} — ${x.size} ml: ${money(x.base)}\nFrutas grátis: ${x.free.join(', ')}\nFrutas extras: ${x.extraFruits.join(', ')||'não selecionadas'}\nCreme grátis: ${x.cream}\nCremes extras: ${x.creamExtras.join(', ')||'nenhum'}\nComplementos: ${x.toppings.join(', ')||'nenhum'}\nComplementos extras: ${x.extraToppings} × R$ 1,50\nObservações: ${x.notes||'nenhuma'}\nSubtotal: ${money(x.subtotal)}\n\n`});
- msg+=`TOTAL: ${money(cart.reduce((a,x)=>a+x.subtotal,0))}\n\nEntrega grátis em Macau (exceto Ilha 1 e Ilha 2).`;
- window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,'_blank');
+
+document.getElementById('send').addEventListener('click', async ()=>{
+ if(!cart.length){
+   alert('Adicione pelo menos um açaí ao carrinho.');
+   return;
+ }
+
+ const name=document.getElementById('customer').value.trim();
+ const address=document.getElementById('address').value.trim();
+ const customerPhone=document.getElementById('customerPhone').value.trim();
+ const deliveryArea=document.getElementById('deliveryArea').value;
+ const paymentMethod=document.getElementById('paymentMethod').value;
+
+ if(!name||!address||!customerPhone||!deliveryArea||!paymentMethod){
+   alert('Preencha todos os campos do pedido.');
+   return;
+ }
+
+ const deliveryFees={
+   'Macau':0,
+   'Ilha 1':3,
+   'Ilha 2':7
+ };
+
+ const subtotal=cart.reduce((a,x)=>a+x.subtotal,0);
+ const deliveryFee=deliveryFees[deliveryArea];
+ const total=subtotal+deliveryFee;
+ const notes=cart.map(x=>x.notes).filter(Boolean).join(' | ');
+const orderId=crypto.randomUUID();
+ const whatsappWindow=window.open('about:blank','_blank');
+
+ const button=document.getElementById('send');
+ button.disabled=true;
+ button.textContent='Salvando pedido...';
+
+ try {
+   const {data,error}=await supabaseClient
+     .from('orders')
+     .insert([{
+       customer_name:name,
+       phone:customerPhone,
+       address:address,
+       delivery_area:deliveryArea,
+       payment_method:paymentMethod,
+       notes:notes,
+       items:cart,
+       subtotal:subtotal,
+       delivery_fee:deliveryFee,
+       total:total,
+       status:'Pedido recebido'
+     }])
+     .select('id')
+     .single();
+
+   if(error) throw error;
+
+   const orderNumber=orderId.slice(0,8).toUpperCase();
+
+   let msg=`Olá! Quero fazer um pedido na OCA - Açaí da Oca 💜
+
+Pedido: ${orderNumber}
+Nome: ${name}
+Telefone: ${customerPhone}
+Endereço: ${address}
+Localidade: ${deliveryArea}
+Pagamento: ${paymentMethod}
+
+`;
+
+   cart.forEach((x,i)=>{
+     msg+=`Açaí ${i+1} — ${x.size} ml: ${money(x.base)}
+Frutas grátis: ${x.free.join(', ')||'não selecionadas'}
+Frutas extras: ${x.extraFruits.join(', ')||'não selecionadas'}
+Creme grátis: ${x.cream}
+Cremes extras: ${x.creamExtras.join(', ')||'nenhum'}
+Complementos: ${x.toppings.join(', ')||'nenhum'}
+Complementos extras: ${x.extraToppings} × R$ 1,50
+Observações: ${x.notes||'nenhuma'}
+Subtotal: ${money(x.subtotal)}
+
+`;
+   });
+
+   msg+=`Subtotal: ${money(subtotal)}
+Taxa de entrega: ${money(deliveryFee)}
+TOTAL: ${money(total)}`;
+
+   const whatsappURL=`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+
+   if(whatsappWindow){
+     whatsappWindow.location.href=whatsappURL;
+   } else {
+     window.location.href=whatsappURL;
+   }
+
+ } catch(error) {
+   if(whatsappWindow) whatsappWindow.close();
+   console.error('Erro ao salvar pedido:',error);
+   alert('Não foi possível salvar o pedido. Verifique sua conexão e tente novamente.');
+ } finally {
+   button.disabled=false;
+   button.textContent='Finalizar pedido pelo WhatsApp';
+ }
 });
+  
 updateLimit();
 </script>
 </body>
