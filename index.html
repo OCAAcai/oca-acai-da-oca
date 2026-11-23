@@ -25,6 +25,7 @@ button{border:0;border-radius:12px;padding:13px 17px;font-weight:900;font-size:1
 footer{text-align:center;padding:24px;color:#e9c8ef}.floating{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);width:min(94%,500px);box-shadow:0 5px 25px #0008}
 @media(max-width:700px){.hero{grid-template-columns:1fr;text-align:center}.cup{font-size:7rem}.cols{grid-template-columns:1fr}.sizes{gap:7px}.size{padding:10px 4px}.size strong{font-size:1.1rem}.choices{grid-template-columns:1fr 1fr}.section{padding:16px}}
 </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <header>
@@ -124,7 +125,10 @@ footer{text-align:center;padding:24px;color:#e9c8ef}.floating{position:fixed;bot
 </main>
 <footer>OCA • Açaí da Oca 💜<br>Peça já o seu — sabor, qualidade e muito amor em cada tigela!</footer>
 <script>
-const phone='5584921492739';
+  const phone='5584921492739';
+const SUPABASE_URL='https://owjmmahyhadevqtjabuq.supabase.co';
+const SUPABASE_KEY='sb_publishable_aMBC_I8d5QqsIw9uFwX_pA_kfGVyyL2';
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const money=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 let cart=[];
 const checked=id=>[...document.querySelectorAll('#'+id+' input:checked')];
