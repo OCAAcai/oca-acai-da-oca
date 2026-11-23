@@ -22,6 +22,21 @@ button:disabled{opacity:.6}
 .order h3{margin-top:0;color:#642d89}
 .order p{margin:8px 0;overflow-wrap:anywhere}
 .order pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f8f5fa;padding:12px;border-radius:8px;font-size:13px}
+ .itemDetail{
+  background:#f8f5fa;
+  border-radius:10px;
+  padding:14px;
+  margin:12px 0;
+  border-left:4px solid #642d89;
+}
+.itemDetail h4{
+  color:#642d89;
+  margin:0 0 10px;
+}
+.itemDetail p{
+  margin:6px 0;
+  font-size:14px;
+}
 .status{font-weight:bold;color:#642d89}
 #message{padding:10px;color:#a32626}
 .top{display:flex;gap:10px;flex-wrap:wrap}
@@ -127,8 +142,24 @@ async function loadOrders(){
   const date=order.created_at?
    new Date(order.created_at).toLocaleString('pt-BR'):'';
 
-  const items=typeof order.items==='string'?
-   order.items:JSON.stringify(order.items,null,2);
+  const itemData=typeof order.items==='string'
+ ? JSON.parse(order.items)
+ : order.items;
+
+const itemsHTML=(Array.isArray(itemData)?itemData:[]).map((item,index)=>`
+ <div class="itemDetail">
+  <h4>🍧 Açaí ${index+1} — ${escapeHTML(item.size)} ml</h4>
+  <p><strong>Valor base:</strong> ${money(item.base)}</p>
+  <p><strong>Frutas grátis:</strong> ${escapeHTML(item.free?.join(', ')||'Nenhuma')}</p>
+  <p><strong>Frutas extras:</strong> ${escapeHTML(item.extraFruits?.join(', ')||'Nenhuma')}</p>
+  <p><strong>Creme:</strong> ${escapeHTML(item.cream||'Nenhum')}</p>
+  <p><strong>Cremes extras:</strong> ${escapeHTML(item.creamExtras?.join(', ')||'Nenhum')}</p>
+  <p><strong>Complementos:</strong> ${escapeHTML(item.toppings?.join(', ')||'Nenhum')}</p>
+  <p><strong>Complementos extras:</strong> ${Number(item.extraToppings||0)}</p>
+  <p><strong>Observações:</strong> ${escapeHTML(item.notes||'Nenhuma')}</p>
+  <p><strong>Subtotal:</strong> ${money(item.subtotal)}</p>
+ </div>
+`).join('');
 
   return `
   <article class="order">
@@ -140,7 +171,7 @@ async function loadOrders(){
    <p><strong>Localidade:</strong> ${escapeHTML(order.delivery_area)}</p>
    <p><strong>Pagamento:</strong> ${escapeHTML(order.payment_method)}</p>
    <p><strong>Produtos do pedido:</strong></p>
-   <pre>${escapeHTML(items)}</pre>
+   ${itemsHTML}
    <p><strong>Observações:</strong> ${escapeHTML(order.notes||'Nenhuma')}</p>
    <p>Subtotal: ${money(order.subtotal)}</p>
    <p>Entrega: ${money(order.delivery_fee)}</p>
