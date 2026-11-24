@@ -171,14 +171,19 @@ document.querySelectorAll('input[name="size"]').forEach(x=>x.addEventListener('c
 document.querySelectorAll('#toppings input').forEach(x=>x.addEventListener('change',updateLimit));
 document.getElementById('add').addEventListener('click',()=>{
  const free=checked('freeFruits').map(x=>x.value);
- const cream=document.querySelector('input[name="cream"]:checked');
- if(!cream){alert('Escolha seu primeiro creme grátis.');return}
- const s=sizeInput().value, info=sizeInfo(), toppings=checked('toppings').map(x=>x.value);
- const extraToppings=Math.max(0,toppings.length-info.limit);
- const creamExtras=checked('extraCream');
- const extraCreamPrice=creamExtras.reduce((a,x)=>a+Number(x.dataset.price||0),0);
- const item={size:s,base:info.price,free,extraFruits:checked('extraFruits').map(x=>x.value),cream:cream.value,creamExtras:creamExtras.map(x=>x.value),toppings,extraToppings,extraCreamPrice,notes:document.getElementById('notes').value};
- item.subtotal=item.base+(item.extraFruits.length*1.5)+(extraToppings*1.5)+extraCreamPrice;
+ const selectedCreams=checked('freeCream').map(x=>x.value);
+if(selectedCreams.length<1 || selectedCreams.length>3){
+ alert('Escolha de 1 a 3 opções entre Açaí, Ninho Trufado e Chocolate.');
+ return;
+}
+const s=sizeInput().value, info=sizeInfo(), toppings=checked('toppings').map(x=>x.value);
+const extraToppings=Math.max(0,toppings.length-info.limit);
+const creamExtras=checked('extraCream');
+const extraCreamPrice=creamExtras.reduce((a,x)=>a+Number(x.dataset.price||0),0)+(selectedCreams.length===3?2:0);
+
+const item={size:s,base:info.price,free,extraFruits:checked('extraFruits').map(x=>x.value),cream:selectedCreams.join(', '),creamExtras:creamExtras.map(x=>x.value),toppings,extraToppings,extraCreamPrice,notes:document.getElementById('notes').value};
+
+item.subtotal=item.base+(item.extraFruits.length*1.5)+(extraToppings*1.5)+extraCreamPrice;
  cart.push(item);renderCart();
  alert('Açaí adicionado ao carrinho!');
 });
